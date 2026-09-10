@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { View, Text, TextInput, StyleSheet, ScrollView } from "react-native";
+import { View, Text, TextInput, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import Button from "../components/Button";
 
@@ -20,7 +20,7 @@ export default function Cadastro({ navigation }) {
     function criarConta() {
         setUsuarios([...usuarios, form])
         setForm({
-            nome: '', email: '', nascimento: '', funcao: '', telefone: '', cep: '', bairro: '', cidade: '',
+            nome: '', email: '', nascimento: '', funcao: '', telefone: '', cep: '', bairro: '', cidade: '', senha: '',
         })
 
         console.log('Usuarios cadastrados: ', [...usuarios, form])
@@ -105,9 +105,25 @@ export default function Cadastro({ navigation }) {
                     value={form.cidade}
                     onChangeText={(texto) => atualizarCampo('cidade', texto)}
                 />
+
+                <Text style={styles.label}>SENHA</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Crie uma senha"
+                    secureTextEntry
+                    value={form.senha}
+                    onChangeText={(texto) => atualizarCampo('senha', texto)}
+                />
             </View>
 
             <Button text="Criar conta" onPress={criarConta} />
+
+            <View style={styles.loginLinha}>
+                <Text style={styles.loginTexto}>Já tem conta? </Text>
+                <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                    <Text style={styles.loginLink}>Entrar</Text>
+                </TouchableOpacity>
+            </View>
         </ScrollView>
     )
 
@@ -115,6 +131,57 @@ export default function Cadastro({ navigation }) {
 
 const styles = StyleSheet.create({
     container: {
-        
+        flex: 1,
+        backgroundColor: '#fff',
+        padding: 20
+    },
+    tag: {
+        color: '#ff5a3c',
+        fontWeight: '500',
+        fontSize: 11,
+    },
+    titulo: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginTop: 5
+    },
+    subtitulo: {
+        color: '#777',
+        marginTop: 5,
+        marginBottom: 20
+    },
+    card: {
+        backgroundColor: '#fff',
+        borderRadius: 20,
+        padding: 20
+    },
+    label: {
+        fontSize: 12,
+        fontWeight: 'bold',
+        color: '#333',
+        marginTop: 10,
+        marginBottom: 5
+    },
+    input: {
+        backgroundColor: '#F7F6F4',
+        borderRadius: 12,
+        padding: 12,
+        fontSize: 14
+    },
+
+    loginLinha: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        marginTop: 20,
+        marginBottom: 30,
+    },
+    loginTexto: {
+        color: '#777',
+        fontSize: 14
+    },
+    loginLink: {
+        color: '#ff5a3c',
+        fontWeight: 'bold',
+        fontSize: 14
     }
 })
