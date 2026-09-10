@@ -15,7 +15,7 @@ export default function BoasVindas({ navigation }){
             </View>
             
             <View style={styles.botao}>
-                <Button text="Continuar" onPress={() => navigation.navigate('Home')}></Button>
+                <Button text="Continuar" onPress={() => navigation.navigate('Cadastro')}></Button>
             </View>
             
         </SafeAreaView>

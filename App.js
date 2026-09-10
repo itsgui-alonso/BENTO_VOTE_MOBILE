@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import BoasVindas from './src/screens/BoasVindas';
+import Cadastro from './src/screens/Cadastro';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +18,7 @@ export default function App() {
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name='BoasVindas' component={BoasVindas} />
+        <Stack.Screen name='Cadastro' component={Cadastro}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
