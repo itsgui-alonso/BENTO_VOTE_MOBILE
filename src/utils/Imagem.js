@@ -2,7 +2,7 @@ import * as ImagePicker from "expo-image-picker";
 import { Alert } from 'react-native'
 
 export async function escolherDaGaleria() {
-  const permissao = await ImagePicker.requestCameraPermissionsAsync();
+  const permissao = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
   if (!permissao.granted) {
     console.log("Precisamos da permissão para pegar a foto");
@@ -47,12 +47,12 @@ export async function tirarFoto() {
 export function selecionarFotoPerfil(aoEscolher){
     Alert.alert(
         'Foto de perfil',
-        'Escolha de onde deseja pegar a foto'
+        'Escolha de onde deseja pegar a foto',
         [
             {
                 text: 'Câmera',
                 onPress: async () => {
-                    const uri = await escolherDaGaleria()
+                    const uri = await tirarFoto()
                     if(uri) aoEscolher(uri)
                 }
             },
