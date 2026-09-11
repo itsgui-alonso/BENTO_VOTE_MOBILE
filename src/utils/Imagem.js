@@ -1,4 +1,5 @@
 import * as ImagePicker from "expo-image-picker";
+import { Alert } from 'react-native'
 
 export async function escolherDaGaleria() {
   const permissao = await ImagePicker.requestCameraPermissionsAsync();
@@ -41,4 +42,28 @@ export async function tirarFoto() {
     }
 
     return resultado.assets[0].uri // Terioricamente a pessoa pode tirar varias fotos, como vem em um array, pegamos so a primeira
+}
+
+function selecionarFotoPerfil(aoEscolher){
+    Alert.alert(
+        'Foto de perfil',
+        'Escolha de onde deseja pegar a foto'
+        [
+            {
+                text: 'Câmera',
+                onPress: async () => {
+                    const uri = await escolherDaGaleria()
+                    if(uri) aoEscolher(uri)
+                }
+            },
+            {
+                text: 'Galeria',
+                onPress: async () => {
+                    const uri = await escolherDaGaleria()
+                    if(uri) aoEscolher(uri) // Verifica mesmo se veio a uri e não null
+                }
+            },
+            { text: 'Cancelar', style: 'cancel'}
+        ]
+    )
 }
