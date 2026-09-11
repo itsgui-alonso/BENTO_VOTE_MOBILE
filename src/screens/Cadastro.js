@@ -4,7 +4,6 @@ import { Picker } from "@react-native-picker/picker";
 import Button from "../components/Button";
 import { useUsuarios } from "../context/UsuariosContext";
 import { selecionarFotoPerfil } from "../utils/Imagem";
-import { notificarContaCriada } from "../utils/Notificações";
 
 
 export default function Cadastro({ navigation }) {
@@ -22,7 +21,6 @@ export default function Cadastro({ navigation }) {
 
     function criarConta() {
         adicionarUsuario(form)
-        notificarContaCriada(form.nome)
         setForm({
             nome: '', email: '', nascimento: '', funcao: '', telefone: '', cep: '', bairro: '', cidade: '', senha: '', foto: '',
         })

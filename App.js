@@ -10,8 +10,6 @@ import Cadastro from './src/screens/Cadastro';
 import Login from './src/screens/Login';
 import { UsuariosProvider } from './src/context/UsuariosContext';
 
-import { useEffect } from 'react';
-import { pedirPermissaoNotificacao } from './src/utils/Notificações';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,9 +17,6 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
 
-   useEffect(() => {
-    pedirPermissaoNotificacao();
-  }, []);
   
   return (
     <UsuariosProvider>
