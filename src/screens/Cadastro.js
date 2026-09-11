@@ -4,7 +4,7 @@ import { Picker } from "@react-native-picker/picker";
 import Button from "../components/Button";
 import { useUsuarios } from "../context/UsuariosContext";
 import { selecionarFotoPerfil } from "../utils/Imagem";
-
+import { formatarCEP, formatarData, formatarTelefone } from "../utils/Mask";
 
 export default function Cadastro({ navigation }) {
     // Guarda as informações do formulario
@@ -12,7 +12,7 @@ export default function Cadastro({ navigation }) {
         nome: '', email: '', nascimento: '', funcao: '', telefone: '', cep: '', bairro: '', cidade: '', senha: '', foto: '',
     })
 
-    // Array qu evai guardar cada cadastro feito de Ususario
+    // Array que vai guardar cada cadastro feito de Ususario
     const { adicionarUsuario } = useUsuarios()
 
     function atualizarCampo(campo, valor) { // O atualizar campo vai pegar tudo oq ue tiha no formulario, e sobrescreve só o campo que mudou
@@ -61,7 +61,8 @@ export default function Cadastro({ navigation }) {
                     placeholder="dd/mm/aaaa"
                     keyboardType="numeric"
                     value={form.nascimento}
-                    onChangeText={(texto) => atualizarCampo('nascimento', texto)}
+                    maxLength={10}
+                    onChangeText={(texto) => atualizarCampo('nascimento', formatarData(texto))}
                 />
 
                 <Text style={styles.label}>FUNÇÃO NA ESCOLA</Text>
@@ -81,7 +82,8 @@ export default function Cadastro({ navigation }) {
                     placeholder="(19) 99999-9999"
                     keyboardType="phone-pad"
                     value={form.telefone}
-                    onChangeText={(texto) => atualizarCampo('telefone', texto)}
+                    maxLength={15}
+                    onChangeText={(texto) => atualizarCampo('telefone', formatarTelefone(texto))}
                 />
 
                 <Text style={styles.label}>CEP</Text>
@@ -90,7 +92,8 @@ export default function Cadastro({ navigation }) {
                     placeholder="13000-000"
                     keyboardType="numeric"
                     value={form.cep}
-                    onChangeText={(texto) => atualizarCampo('cep', texto)}
+                    maxLength={9}
+                    onChangeText={(texto) => atualizarCampo('cep', formatarCEP(texto))}
                 />
 
                 <Text style={styles.label}>BAIRRO</Text>

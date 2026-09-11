@@ -18,7 +18,7 @@ export default function Login({ navigation }){
         const usuarioEncontrado = buscarUsuario(email, senha)
 
         if(usuarioEncontrado){
-            navigation.navigate('BoasVindas')
+            navigation.navigate('Home', { usuario: usuarioEncontrado })
         } else {
             console.log('E-mail ou senha incorretos')
         }
