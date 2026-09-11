@@ -2,28 +2,29 @@ import React, {useState} from "react";
 import { View, Text, TextInput, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import Button from "../components/Button";
-
+import { useUsuarios } from "../context/UsuariosContext";
 
 export default function Cadastro({ navigation }) {
     // Guarda as informações do formulario
     const [form, setForm] = useState({
-        nome: '', email: '', nascimento: '', funcao: '', telefone: '', cep: '', bairro: '', cidade: '',
+        nome: '', email: '', nascimento: '', funcao: '', telefone: '', cep: '', bairro: '', cidade: '', senha: '',
     })
 
     // Array qu evai guardar cada cadastro feito de Ususario
-    const [usuarios, setUsuarios] = useState([])
+    const { adicionarUsuario } = useUsuarios()
 
     function atualizarCampo(campo, valor) { // O atualizar campo vai pegar tudo oq ue tiha no formulario, e sobrescreve só o campo que mudou
         setForm({ ...form, [campo]: valor })
     }
 
     function criarConta() {
-        setUsuarios([...usuarios, form])
+        adicionarUsuario(form)
         setForm({
             nome: '', email: '', nascimento: '', funcao: '', telefone: '', cep: '', bairro: '', cidade: '', senha: '',
         })
 
-        console.log('Usuarios cadastrados: ', [...usuarios, form])
+        console.log('Usuarios cadastrados: ', form)
+        navigation.navigate('Login')
     }
 
     return (
