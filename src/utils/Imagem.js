@@ -44,7 +44,7 @@ export async function tirarFoto() {
     return resultado.assets[0].uri // Terioricamente a pessoa pode tirar varias fotos, como vem em um array, pegamos so a primeira
 }
 
-function selecionarFotoPerfil(aoEscolher){
+export function selecionarFotoPerfil(aoEscolher){
     Alert.alert(
         'Foto de perfil',
         'Escolha de onde deseja pegar a foto'

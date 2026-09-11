@@ -1,13 +1,15 @@
 import React, {useState} from "react";
-import { View, Text, TextInput, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, TextInput, StyleSheet, ScrollView, TouchableOpacity, Image } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import Button from "../components/Button";
 import { useUsuarios } from "../context/UsuariosContext";
+import { selecionarFotoPerfil } from "../utils/Imagem";
+
 
 export default function Cadastro({ navigation }) {
     // Guarda as informações do formulario
     const [form, setForm] = useState({
-        nome: '', email: '', nascimento: '', funcao: '', telefone: '', cep: '', bairro: '', cidade: '', senha: '',
+        nome: '', email: '', nascimento: '', funcao: '', telefone: '', cep: '', bairro: '', cidade: '', senha: '', foto: '',
     })
 
     // Array qu evai guardar cada cadastro feito de Ususario
@@ -20,7 +22,7 @@ export default function Cadastro({ navigation }) {
     function criarConta() {
         adicionarUsuario(form)
         setForm({
-            nome: '', email: '', nascimento: '', funcao: '', telefone: '', cep: '', bairro: '', cidade: '', senha: '',
+            nome: '', email: '', nascimento: '', funcao: '', telefone: '', cep: '', bairro: '', cidade: '', senha: '', foto: '',
         })
 
         console.log('Usuarios cadastrados: ', form)
@@ -117,6 +119,18 @@ export default function Cadastro({ navigation }) {
                 />
             </View>
 
+            <View style={styles.fotoContainer}>
+                <TouchableOpacity onPress={() => selecionarFotoPerfil((uri) => atualizarCampo('foto', uri))}>
+                    {form.foto ? (
+                        <Image source={{ uri: form.foto }} style={styles.fotoPreview} />
+                    ) : (
+                        <View style={styles.fotoPlaceholder}>
+                            <Text style={styles.fotoPlaceholderTexto}>Adicionar foto</Text>
+                        </View>
+                    )}
+                </TouchableOpacity>
+            </View>
+
             <Button text="Criar conta" onPress={criarConta} />
 
             <View style={styles.loginLinha}>
@@ -184,5 +198,30 @@ const styles = StyleSheet.create({
         color: '#ff5a3c',
         fontWeight: 'bold',
         fontSize: 14
+    },
+    fotoContainer: {
+        alignItems: 'center',
+        marginBottom: 10,
+    },
+    fotoPreview: {
+        width: 100,
+        height: 100,
+        borderRadius: 50
+    },
+    fotoPlaceholder: {
+        width: 100,
+        height: 100,
+        borderRadius: 50,
+        backgroundColor: '#f7f6f4',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderWidth: 1,
+        borderColor: '#ddd',
+        borderStyle: 'dashed'
+    },
+    fotoPlaceholder: {
+        fontSize: 11,
+        color: '#999',
+        textAlign: 'center'
     }
 })
